@@ -12,7 +12,7 @@ function App() {
   const [error, setError] = useState('');
   const [editingId, setEditingId] = useState(null);
 
-  // Load tasks on first render
+  // Load tasks 
   useEffect(() => {
     loadTasks();
   }, []);
@@ -92,6 +92,13 @@ function App() {
     }
   };
 
+  const getStatusColor = (status) => {
+    if (status === 'To Do') return '#f472b6';      //add pink color
+    if (status === 'In Progress') return '#c026d3'; //add purple color
+    if (status === 'Done') return '#86198f';        //add deep plum color
+    return '#f472b6';
+  };
+
   return (
     <div className="container">
       <h1>Mini Task Tracker</h1>
@@ -139,6 +146,7 @@ function App() {
                 <select
                   value={task.status}
                   onChange={(e) => handleStatusChange(task, e.target.value)}
+                  style={{ backgroundColor: getStatusColor(task.status) }}
                 >
                   <option value="To Do">To Do</option>
                   <option value="In Progress">In Progress</option>
